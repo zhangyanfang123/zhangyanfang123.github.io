@@ -79,18 +79,21 @@
 
 
 
-<meta name="description" content="关于我          关于我">
+<meta name="description" content="关于我         div{float: left;}">
 <meta property="og:type" content="website">
 <meta property="og:title" content="This is Zing.">
 <meta property="og:url" content="http://yoursite.com/about/index.html">
 <meta property="og:site_name" content="This is Zing.">
-<meta property="og:description" content="关于我          关于我">
+<meta property="og:description" content="关于我         div{float: left;}">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/avatar.jpg">
-<meta property="og:updated_time" content="2018-03-27T06:51:32.185Z">
+<meta property="og:image" content="http://yoursite.com/images/avatar.jpg">
+<meta property="og:image" content="http://yoursite.com/images/avatar.jpg">
+<meta property="og:image" content="http://yoursite.com/images/avatar.jpg">
+<meta property="og:updated_time" content="2018-03-27T07:00:23.741Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="This is Zing.">
-<meta name="twitter:description" content="关于我          关于我">
+<meta name="twitter:description" content="关于我         div{float: left;}">
 <meta name="twitter:image" content="http://yoursite.com/images/avatar.jpg">
 
 
@@ -285,10 +288,15 @@
     <meta charset="utf-8">
     <title>关于我</title>
   </head>
-  <body background="/images/bg.jpg">
-   <h1>关于我</h1>
-   <img src="/images/avatar.jpg" width="100px" height="250px">
-  </body>
+  <style>
+  div{float: left;}
+  </style>
+  <body>
+   <div><img src="/images/avatar.jpg" width="200px" height="500px"><div>
+     <div><img src="/images/avatar.jpg" width="200px" height="500px"><div>
+       <div><img src="/images/avatar.jpg" width="200px" height="500px"><div>
+         <div><img src="/images/avatar.jpg" width="200px" height="500px"><div>
+  </div></div></div></div></div></div></div></div></body>
 </html>
 
         
@@ -332,17 +340,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -416,22 +415,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">关于我</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
