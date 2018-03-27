@@ -272,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/27/0327/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/27/gitpop/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zing">
@@ -291,7 +291,149 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/03/27/0327/" itemprop="url">HTTP请求错误解析</a></h1>
+                <a class="post-title-link" href="/2018/03/27/gitpop/" itemprop="url">用命令行将项目传到github</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-27T14:05:29+08:00">
+                2018-03-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="步骤如下"><a href="#步骤如下" class="headerlink" title="步骤如下"></a>步骤如下</h3><h4 id="1-安装git后，打开cmd，进入要上传的文件夹中；"><a href="#1-安装git后，打开cmd，进入要上传的文件夹中；" class="headerlink" title="1.安装git后，打开cmd，进入要上传的文件夹中；"></a>1.安装git后，打开cmd，进入要上传的文件夹中；</h4><h4 id="2-输入git-init-初始化本地git仓库；"><a href="#2-输入git-init-初始化本地git仓库；" class="headerlink" title="2.输入git init 初始化本地git仓库；"></a>2.输入<code>git init</code> 初始化本地git仓库；</h4><h4 id="3-git-add-将所有文件提交到暂存区；"><a href="#3-git-add-将所有文件提交到暂存区；" class="headerlink" title="3.git add .`将所有文件提交到暂存区；"></a>3.<code>git add .`</code>将所有文件提交到暂存区；</h4><h4 id="4-git-commit-m-39-说明文字-39-；"><a href="#4-git-commit-m-39-说明文字-39-；" class="headerlink" title="4.git commit -m&#39;说明文字&#39;；"></a>4.<code>git commit -m&#39;说明文字&#39;</code>；</h4><h4 id="5-git-remote-add-origin-http-github-要关联的github地址-，关联github；"><a href="#5-git-remote-add-origin-http-github-要关联的github地址-，关联github；" class="headerlink" title="5.git remote add origin http://github...(要关联的github地址)，关联github；"></a>5.<code>git remote add origin http://github...</code>(要关联的github地址)，关联github；</h4><h4 id="6-git-pull-origin-master-将GitHub上的代码传到本地；"><a href="#6-git-pull-origin-master-将GitHub上的代码传到本地；" class="headerlink" title="6.git pull origin master ,将GitHub上的代码传到本地；"></a>6.<code>git pull origin master</code> ,将GitHub上的代码传到本地；</h4><h4 id="7-git-push-u-origin-master-第一次上传代码，如果没有意外就上传成功。"><a href="#7-git-push-u-origin-master-第一次上传代码，如果没有意外就上传成功。" class="headerlink" title="7.git push -u origin master,第一次上传代码，如果没有意外就上传成功。"></a>7.<code>git push -u origin master</code>,第一次上传代码，如果没有意外就上传成功。</h4><h3 id="可能会有的报错："><a href="#可能会有的报错：" class="headerlink" title="可能会有的报错："></a>可能会有的报错：</h3><h4 id="1-不算报错，它会提醒让你提交个人信息，输入：git-config-user-email-quot-123-gmail-com-quot-git-config-user-name-quot-rongy-quot"><a href="#1-不算报错，它会提醒让你提交个人信息，输入：git-config-user-email-quot-123-gmail-com-quot-git-config-user-name-quot-rongy-quot" class="headerlink" title="1.不算报错，它会提醒让你提交个人信息，输入：git config user.email &quot;123@gmail.com&quot; git config user.name &quot;rongy&quot;"></a>1.不算报错，它会提醒让你提交个人信息，输入：<code>git config user.email &quot;123@gmail.com&quot; git config user.name &quot;rongy&quot;</code></h4><h4 id="2-在-git-add-后会显示on-branch-master-nothing-to-commit-working-directory-clean-这说明你的文件已经commit过了，所以在add-就没用了-所以不用管它"><a href="#2-在-git-add-后会显示on-branch-master-nothing-to-commit-working-directory-clean-这说明你的文件已经commit过了，所以在add-就没用了-所以不用管它" class="headerlink" title="2.在 git add .后会显示on branch master nothing to commit,working directory clean,这说明你的文件已经commit过了，所以在add .就没用了,所以不用管它;"></a>2.在 <code>git add .</code>后会显示on branch master nothing to commit,working directory clean,这说明你的文件已经commit过了，所以在add .就没用了,所以不用管它;</h4><h4 id="3-在git-pull-origin-master后，出现fatal-refusing-to-merge-unrelated-histories，出现这个应该是之前在github上用导入的方式导入过文件，我们再提交，本地的和github上的就没有共同祖先（原因是这个，但为什么我也不懂。。。），"><a href="#3-在git-pull-origin-master后，出现fatal-refusing-to-merge-unrelated-histories，出现这个应该是之前在github上用导入的方式导入过文件，我们再提交，本地的和github上的就没有共同祖先（原因是这个，但为什么我也不懂。。。），" class="headerlink" title="3.在git pull origin master后，出现fatal: refusing to merge unrelated histories，出现这个应该是之前在github上用导入的方式导入过文件，我们再提交，本地的和github上的就没有共同祖先（原因是这个，但为什么我也不懂。。。），"></a>3.在<code>git pull origin master</code>后，出现fatal: refusing to merge unrelated histories，出现这个应该是之前在github上用导入的方式导入过文件，我们再提交，本地的和github上的就没有共同祖先（原因是这个，但为什么我也不懂。。。），</h4><p>就无法提交了，解决方法是输入<code>git pull origin master</code> –allow-unrelated-histories。</p>
+<h4 id="4-并且在pull操作后的push操作，在命令后再加上备注名，即git-push-u-origin-master：master"><a href="#4-并且在pull操作后的push操作，在命令后再加上备注名，即git-push-u-origin-master：master" class="headerlink" title="4.并且在pull操作后的push操作，在命令后再加上备注名，即git push -u origin master：master"></a>4.并且在pull操作后的push操作，在命令后再加上备注名，即<code>git push -u origin master：master</code></h4>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/27/httperror/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="This is Zing.">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/27/httperror/" itemprop="url">HTTP请求错误解析</a></h1>
         
 
         <div class="post-meta">
@@ -441,7 +583,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/23/0323/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/23/inputdate/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zing">
@@ -460,7 +602,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/03/23/0323/" itemprop="url">HTML简单时间控件</a></h1>
+                <a class="post-title-link" href="/2018/03/23/inputdate/" itemprop="url">HTML简单时间控件</a></h1>
         
 
         <div class="post-meta">
@@ -1019,7 +1161,7 @@
       
         
           
-            <p>   你好啊，陌生人！这里是zing.<br>   <img src="/images/1.gif" alt="avatar"></p>
+            <p>   你好哇，陌生人！这里是zing.<br>   <img src="/images/1.gif" alt="avatar"></p>
 
           
         
@@ -1105,7 +1247,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1116,7 +1258,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1127,7 +1269,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="js," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="HTTP请求错误400、401、402、403、404、405、406、407、412、414、500、501、502解析HTTP 错误 400400 请求出错由于语法格式有误，服务器无法理解此请求。不作修改，客户程序就无法重复此请求。 HTTP 错误 401401.1 未授权：登录失败此错误表明传输给服务器的证书与登录服务器所需的证书不匹配。请与 Web 服务器的管理员联系，以确认您是否具有访问">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP请求错误解析">
+<meta property="og:url" content="http://yoursite.com/2018/03/27/httperror/index.html">
+<meta property="og:site_name" content="This is Zing.">
+<meta property="og:description" content="HTTP请求错误400、401、402、403、404、405、406、407、412、414、500、501、502解析HTTP 错误 400400 请求出错由于语法格式有误，服务器无法理解此请求。不作修改，客户程序就无法重复此请求。 HTTP 错误 401401.1 未授权：登录失败此错误表明传输给服务器的证书与登录服务器所需的证书不匹配。请与 Web 服务器的管理员联系，以确认您是否具有访问">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-27T05:55:07.508Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTTP请求错误解析">
+<meta name="twitter:description" content="HTTP请求错误400、401、402、403、404、405、406、407、412、414、500、501、502解析HTTP 错误 400400 请求出错由于语法格式有误，服务器无法理解此请求。不作修改，客户程序就无法重复此请求。 HTTP 错误 401401.1 未授权：登录失败此错误表明传输给服务器的证书与登录服务器所需的证书不匹配。请与 Web 服务器的管理员联系，以确认您是否具有访问">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/27/httperror/"/>
+
+
+
+
+
+  <title>HTTP请求错误解析 | This is Zing.</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4ea89634c41b8b1d220e1b9b53b1a8e5";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">This is Zing.</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">不负春光，野蛮生长</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/27/httperror/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="This is Zing.">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">HTTP请求错误解析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-27T13:46:35+08:00">
+                2018-03-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="HTTP请求错误400、401、402、403、404、405、406、407、412、414、500、501、502解析"><a href="#HTTP请求错误400、401、402、403、404、405、406、407、412、414、500、501、502解析" class="headerlink" title="HTTP请求错误400、401、402、403、404、405、406、407、412、414、500、501、502解析"></a>HTTP请求错误400、401、402、403、404、405、406、407、412、414、500、501、502解析</h1><h2 id="HTTP-错误-400"><a href="#HTTP-错误-400" class="headerlink" title="HTTP 错误 400"></a>HTTP 错误 400</h2><p>400 请求出错<br>由于语法格式有误，服务器无法理解此请求。不作修改，客户程序就无法重复此请求。</p>
+<h2 id="HTTP-错误-401"><a href="#HTTP-错误-401" class="headerlink" title="HTTP 错误 401"></a>HTTP 错误 401</h2><h3 id="401-1-未授权：登录失败"><a href="#401-1-未授权：登录失败" class="headerlink" title="401.1 未授权：登录失败"></a>401.1 未授权：登录失败</h3><p>此错误表明传输给服务器的证书与登录服务器所需的证书不匹配。<br>请与 Web 服务器的管理员联系，以确认您是否具有访问所请求资源的权限。</p>
+<h3 id="401-2-未授权：服务器的配置导致登录失败"><a href="#401-2-未授权：服务器的配置导致登录失败" class="headerlink" title="401.2 未授权：服务器的配置导致登录失败"></a>401.2 未授权：服务器的配置导致登录失败</h3><p>此错误表明传输给服务器的证书与登录服务器所需的证书不匹配。此错误通常由未发送正确的 WWW 验证表头字段所致。<br>请与 Web 服务器的管理员联系，以确认您是否具有访问所请求资源的权限。</p>
+<h3 id="401-3-未授权：由于资源中的-ACL-而未授权"><a href="#401-3-未授权：由于资源中的-ACL-而未授权" class="headerlink" title="401.3 未授权：由于资源中的 ACL 而未授权"></a>401.3 未授权：由于资源中的 ACL 而未授权</h3><p>此错误表明客户所传输的证书没有对服务器中特定资源的访问权限。此资源可能是客户机中的地址行所列出的网页或文件，也可能是处理客户机中的地址行所列出的文件所需服务器上的其他文件。<br>请记录试图访问的完整地址，并与 Web 服务器的管理员联系以确认您是否具有访问所请求资源的权限。</p>
+<h3 id="401-4-未授权：授权服务被筛选程序拒绝"><a href="#401-4-未授权：授权服务被筛选程序拒绝" class="headerlink" title="401.4 未授权：授权服务被筛选程序拒绝"></a>401.4 未授权：授权服务被筛选程序拒绝</h3><p>此错误表明 Web 服务器已经安装了筛选程序，用以验证连接到服务器的用户。此筛选程序拒绝连接到此服务器的真品证书的访问。<br>请记录试图访问的完整地址，并与 Web 服务器的管理员联系以确认您是否具有访问所请求资源的权限。</p>
+<h3 id="401-5-未授权：ISAPI-CGI-应用程序的授权失败"><a href="#401-5-未授权：ISAPI-CGI-应用程序的授权失败" class="headerlink" title="401.5 未授权：ISAPI/CGI 应用程序的授权失败"></a>401.5 未授权：ISAPI/CGI 应用程序的授权失败</h3><p>此错误表明试图使用的 Web服务器中的地址已经安装了 ISAPI 或 CGI程序，在继续之前用以验证用户的证书。此程序拒绝用来连接到服务器的真品证书的访问。<br>请记录试图访问的完整地址，并与 Web服务器的管理员联系以确认您是否具有访问所请求资源的权限</p>
+<h2 id="HTTP-错误-403"><a href="#HTTP-错误-403" class="headerlink" title="HTTP 错误 403"></a>HTTP 错误 403</h2><h3 id="403-1-禁止：禁止执行访问"><a href="#403-1-禁止：禁止执行访问" class="headerlink" title="403.1 禁止：禁止执行访问"></a>403.1 禁止：禁止执行访问</h3><p>如果从并不允许执行程序的目录中执行 CGI、ISAPI或其他执行程序就可能引起此错误。<br>如果问题依然存在，请与 Web 服务器的管理员联系。</p>
+<h3 id="403-2-禁止：禁止读取访问"><a href="#403-2-禁止：禁止读取访问" class="headerlink" title="403.2 禁止：禁止读取访问"></a>403.2 禁止：禁止读取访问</h3><p>如果没有可用的默认网页或未启用此目录的目录浏览，或者试图显示驻留在只标记为执行或脚本权限的目录中的HTML 页时就会导致此错误。<br>如果问题依然存在，请与 Web 服务器的管理员联系。</p>
+<h3 id="403-3-禁止：禁止写访问"><a href="#403-3-禁止：禁止写访问" class="headerlink" title="403.3 禁止：禁止写访问"></a>403.3 禁止：禁止写访问</h3><p>如果试图上载或修改不允许写访问的目录中的文件，就会导致此问题。<br>如果问题依然存在，请与 Web服务器的管理员联系。</p>
+<h3 id="403-4-禁止：需要-SSL"><a href="#403-4-禁止：需要-SSL" class="headerlink" title="403.4 禁止：需要 SSL"></a>403.4 禁止：需要 SSL</h3><p>此错误表明试图访问的网页受安全套接字层（SSL）的保护。要查看，必须在试图访问的地址前输入https:// 以启用 SSL。<br>如果问题依然存在，请与 Web服务器的管理员联系。</p>
+<h3 id="403-5-禁止：需要-SSL-128"><a href="#403-5-禁止：需要-SSL-128" class="headerlink" title="403.5 禁止：需要 SSL 128"></a>403.5 禁止：需要 SSL 128</h3><p>此错误消息表明您试图访问的资源受 128位的安全套接字层（SSL）保护。要查看此资源，需要有支持此SSL 层的浏览器。<br>请确认浏览器是否支持 128 位 SSL安全性。如果支持，就与 Web服务器的管理员联系，并报告问题。</p>
+<h3 id="403-6-禁止：拒绝-IP-地址"><a href="#403-6-禁止：拒绝-IP-地址" class="headerlink" title="403.6 禁止：拒绝 IP 地址"></a>403.6 禁止：拒绝 IP 地址</h3><p>如果服务器含有不允许访问此站点的 IP地址列表，并且您正使用的 IP地址在此列表中，就会导致此问题。<br>如果问题依然存在，请与 Web服务器的管理员联系。</p>
+<h3 id="403-7-禁止：需要用户证书"><a href="#403-7-禁止：需要用户证书" class="headerlink" title="403.7 禁止：需要用户证书"></a>403.7 禁止：需要用户证书</h3><p>当试图访问的资源要求浏览器具有服务器可识别的用户安全套接字层（SSL）证书时就会导致此问题。可用来验证您是否为此资源的合法用户。<br>请与 Web服务器的管理员联系以获取有效的用户证书。</p>
+<h3 id="403-8-禁止：禁止站点访问"><a href="#403-8-禁止：禁止站点访问" class="headerlink" title="403.8 禁止：禁止站点访问"></a>403.8 禁止：禁止站点访问</h3><p>如果 Web服务器不为请求提供服务，或您没有连接到此站点的权限时，就会导致此问题。<br>请与 Web 服务器的管理员联系。</p>
+<h3 id="403-9-禁止访问：所连接的用户太多"><a href="#403-9-禁止访问：所连接的用户太多" class="headerlink" title="403.9 禁止访问：所连接的用户太多"></a>403.9 禁止访问：所连接的用户太多</h3><p>如果 Web太忙并且由于流量过大而无法处理您的请求时就会导致此问题。请稍后再次连接。<br>如果问题依然存在，请与 Web 服务器的管理员联系。</p>
+<h3 id="403-10-禁止访问：配置无效"><a href="#403-10-禁止访问：配置无效" class="headerlink" title="403.10 禁止访问：配置无效"></a>403.10 禁止访问：配置无效</h3><p>此时 Web 服务器的配置存在问题。<br>如果问题依然存在，请与 Web服务器的管理员联系。</p>
+<h3 id="403-11-禁止访问：密码已更改"><a href="#403-11-禁止访问：密码已更改" class="headerlink" title="403.11 禁止访问：密码已更改"></a>403.11 禁止访问：密码已更改</h3><p>在身份验证的过程中如果用户输入错误的密码，就会导致此错误。请刷新网页并重试。<br>如果问题依然存在，请与 Web服务器的管理员联系。</p>
+<h3 id="403-12-禁止访问：映射程序拒绝访问"><a href="#403-12-禁止访问：映射程序拒绝访问" class="headerlink" title="403.12 禁止访问：映射程序拒绝访问"></a>403.12 禁止访问：映射程序拒绝访问</h3><p>拒绝用户证书试图访问此 Web 站点。<br>请与站点管理员联系以建立用户证书权限。如果必要，也可以更改用户证书并重试。</p>
+<h2 id="HTTP-错误-404"><a href="#HTTP-错误-404" class="headerlink" title="HTTP 错误 404"></a>HTTP 错误 404</h2><h3 id="404-找不到"><a href="#404-找不到" class="headerlink" title="404 找不到"></a>404 找不到</h3><p>Web 服务器找不到您所请求的文件或脚本。请检查URL 以确保路径正确。<br>如果问题依然存在，请与服务器的管理员联系。</p>
+<h2 id="HTTP-错误-405"><a href="#HTTP-错误-405" class="headerlink" title="HTTP 错误 405"></a>HTTP 错误 405</h2><h3 id="405-不允许此方法"><a href="#405-不允许此方法" class="headerlink" title="405 不允许此方法"></a>405 不允许此方法</h3><p>对于请求所标识的资源，不允许使用请求行中所指定的方法。请确保为所请求的资源设置了正确的 MIME 类型。<br>如果问题依然存在，请与服务器的管理员联系。</p>
+<h2 id="HTTP-错误-406"><a href="#HTTP-错误-406" class="headerlink" title="HTTP 错误 406"></a>HTTP 错误 406</h2><h3 id="406-不可接受"><a href="#406-不可接受" class="headerlink" title="406 不可接受"></a>406 不可接受</h3><p>根据此请求中所发送的“接受”标题，此请求所标识的资源只能生成内容特征为“不可接受”的响应实体。<br>如果问题依然存在，请与服务器的管理员联系。</p>
+<h2 id="HTTP-错误-407"><a href="#HTTP-错误-407" class="headerlink" title="HTTP 错误 407"></a>HTTP 错误 407</h2><h3 id="407-需要代理身份验证"><a href="#407-需要代理身份验证" class="headerlink" title="407 需要代理身份验证"></a>407 需要代理身份验证</h3><p>在可为此请求提供服务之前，您必须验证此代理服务器。请登录到代理服务器，然后重试。<br>如果问题依然存在，请与 Web 服务器的管理员联系。</p>
+<h2 id="HTTP-错误-412"><a href="#HTTP-错误-412" class="headerlink" title="HTTP 错误 412"></a>HTTP 错误 412</h2><h3 id="412-前提条件失败"><a href="#412-前提条件失败" class="headerlink" title="412 前提条件失败"></a>412 前提条件失败</h3><p>在服务器上测试前提条件时，部分请求标题字段中所给定的前提条件估计为FALSE。客户机将前提条件放置在当前资源 metainformation（标题字段数据）中，以防止所请求的方法被误用到其他资源。<br>如果问题依然存在，请与 Web 服务器的管理员联系。</p>
+<h2 id="HTTP-错误-414"><a href="#HTTP-错误-414" class="headerlink" title="HTTP 错误 414"></a>HTTP 错误 414</h2><h3 id="414-Request-URI-太长"><a href="#414-Request-URI-太长" class="headerlink" title="414 Request-URI 太长"></a>414 Request-URI 太长</h3><p>Request-URL太长，服务器拒绝服务此请求。仅在下列条件下才有可能发生此条件：<br>客户机错误地将 POST 请求转换为具有较长的查询信息的 GET 请求。<br>客户机遇到了重定向问题（例如，指向自身的后缀的重定向前缀）。<br>服务器正遭受试图利用某些服务器（将固定长度的缓冲区用于读取或执行 Request-URI）中的安全性漏洞的客户干扰。<br>如果问题依然存在，请与 Web 服务器的管理员联系。</p>
+<h2 id="HTTP-错误-415"><a href="#HTTP-错误-415" class="headerlink" title="HTTP 错误 415"></a>HTTP 错误 415</h2><h3 id="415-服务器无法处理请求附带的媒体格式"><a href="#415-服务器无法处理请求附带的媒体格式" class="headerlink" title="415     服务器无法处理请求附带的媒体格式"></a>415     服务器无法处理请求附带的媒体格式</h3><p>解决方法：在ajax请求中加上contentType: ‘application/json’</p>
+<h2 id="HTTP-错误-500"><a href="#HTTP-错误-500" class="headerlink" title="HTTP 错误 500"></a>HTTP 错误 500</h2><h3 id="500-服务器的内部错误"><a href="#500-服务器的内部错误" class="headerlink" title="500 服务器的内部错误"></a>500 服务器的内部错误</h3><p>Web 服务器不能执行此请求。请稍后重试此请求。<br>如果问题依然存在，请与 Web服务器的管理员联系。</p>
+<h2 id="HTTP-错误-501"><a href="#HTTP-错误-501" class="headerlink" title="HTTP 错误 501"></a>HTTP 错误 501</h2><h3 id="501-未实现"><a href="#501-未实现" class="headerlink" title="501 未实现"></a>501 未实现</h3><p>Web 服务器不支持实现此请求所需的功能。请检查URL 中的错误，如果问题依然存在，请与 Web服务器的管理员联系。</p>
+<h2 id="HTTP-错误-502"><a href="#HTTP-错误-502" class="headerlink" title="HTTP 错误 502"></a>HTTP 错误 502</h2><h3 id="502-网关出错"><a href="#502-网关出错" class="headerlink" title="502 网关出错"></a>502 网关出错</h3><p>当用作网关或代理时，服务器将从试图实现此请求时所访问的upstream 服务器中接收无效的响应。<br>如果问题依然存在，请与 Web服务器的管理员联系。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat.jpg" alt="Zing 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Zing 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag"># js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/23/inputdate/" rel="next" title="HTML简单时间控件">
+                <i class="fa fa-chevron-left"></i> HTML简单时间控件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/27/gitpop/" rel="prev" title="用命令行将项目传到github">
+                用命令行将项目传到github <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Zing" />
+            
+              <p class="site-author-name" itemprop="name">Zing</p>
+              <p class="site-description motion-element" itemprop="description">她才不是个没有故事的女同学</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/zhangyanfang123" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP请求错误400、401、402、403、404、405、406、407、412、414、500、501、502解析"><span class="nav-number">1.</span> <span class="nav-text">HTTP请求错误400、401、402、403、404、405、406、407、412、414、500、501、502解析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-错误-400"><span class="nav-number">1.1.</span> <span class="nav-text">HTTP 错误 400</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-错误-401"><span class="nav-number">1.2.</span> <span class="nav-text">HTTP 错误 401</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#401-1-未授权：登录失败"><span class="nav-number">1.2.1.</span> <span class="nav-text">401.1 未授权：登录失败</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#401-2-未授权：服务器的配置导致登录失败"><span class="nav-number">1.2.2.</span> <span class="nav-text">401.2 未授权：服务器的配置导致登录失败</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#401-3-未授权：由于资源中的-ACL-而未授权"><span class="nav-number">1.2.3.</span> <span class="nav-text">401.3 未授权：由于资源中的 ACL 而未授权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#401-4-未授权：授权服务被筛选程序拒绝"><span class="nav-number">1.2.4.</span> <span class="nav-text">401.4 未授权：授权服务被筛选程序拒绝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#401-5-未授权：ISAPI-CGI-应用程序的授权失败"><span class="nav-number">1.2.5.</span> <span class="nav-text">401.5 未授权：ISAPI/CGI 应用程序的授权失败</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-错误-403"><span class="nav-number">1.3.</span> <span class="nav-text">HTTP 错误 403</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#403-1-禁止：禁止执行访问"><span class="nav-number">1.3.1.</span> <span class="nav-text">403.1 禁止：禁止执行访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#403-2-禁止：禁止读取访问"><span class="nav-number">1.3.2.</span> <span class="nav-text">403.2 禁止：禁止读取访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#403-3-禁止：禁止写访问"><span class="nav-number">1.3.3.</span> <span class="nav-text">403.3 禁止：禁止写访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#403-4-禁止：需要-SSL"><span class="nav-number">1.3.4.</span> <span class="nav-text">403.4 禁止：需要 SSL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#403-5-禁止：需要-SSL-128"><span class="nav-number">1.3.5.</span> <span class="nav-text">403.5 禁止：需要 SSL 128</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#403-6-禁止：拒绝-IP-地址"><span class="nav-number">1.3.6.</span> <span class="nav-text">403.6 禁止：拒绝 IP 地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#403-7-禁止：需要用户证书"><span class="nav-number">1.3.7.</span> <span class="nav-text">403.7 禁止：需要用户证书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#403-8-禁止：禁止站点访问"><span class="nav-number">1.3.8.</span> <span class="nav-text">403.8 禁止：禁止站点访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#403-9-禁止访问：所连接的用户太多"><span class="nav-number">1.3.9.</span> <span class="nav-text">403.9 禁止访问：所连接的用户太多</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#403-10-禁止访问：配置无效"><span class="nav-number">1.3.10.</span> <span class="nav-text">403.10 禁止访问：配置无效</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#403-11-禁止访问：密码已更改"><span class="nav-number">1.3.11.</span> <span class="nav-text">403.11 禁止访问：密码已更改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#403-12-禁止访问：映射程序拒绝访问"><span class="nav-number">1.3.12.</span> <span class="nav-text">403.12 禁止访问：映射程序拒绝访问</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-错误-404"><span class="nav-number">1.4.</span> <span class="nav-text">HTTP 错误 404</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#404-找不到"><span class="nav-number">1.4.1.</span> <span class="nav-text">404 找不到</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-错误-405"><span class="nav-number">1.5.</span> <span class="nav-text">HTTP 错误 405</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#405-不允许此方法"><span class="nav-number">1.5.1.</span> <span class="nav-text">405 不允许此方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-错误-406"><span class="nav-number">1.6.</span> <span class="nav-text">HTTP 错误 406</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#406-不可接受"><span class="nav-number">1.6.1.</span> <span class="nav-text">406 不可接受</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-错误-407"><span class="nav-number">1.7.</span> <span class="nav-text">HTTP 错误 407</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#407-需要代理身份验证"><span class="nav-number">1.7.1.</span> <span class="nav-text">407 需要代理身份验证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-错误-412"><span class="nav-number">1.8.</span> <span class="nav-text">HTTP 错误 412</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#412-前提条件失败"><span class="nav-number">1.8.1.</span> <span class="nav-text">412 前提条件失败</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-错误-414"><span class="nav-number">1.9.</span> <span class="nav-text">HTTP 错误 414</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#414-Request-URI-太长"><span class="nav-number">1.9.1.</span> <span class="nav-text">414 Request-URI 太长</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-错误-415"><span class="nav-number">1.10.</span> <span class="nav-text">HTTP 错误 415</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#415-服务器无法处理请求附带的媒体格式"><span class="nav-number">1.10.1.</span> <span class="nav-text">415     服务器无法处理请求附带的媒体格式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-错误-500"><span class="nav-number">1.11.</span> <span class="nav-text">HTTP 错误 500</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#500-服务器的内部错误"><span class="nav-number">1.11.1.</span> <span class="nav-text">500 服务器的内部错误</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-错误-501"><span class="nav-number">1.12.</span> <span class="nav-text">HTTP 错误 501</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#501-未实现"><span class="nav-number">1.12.1.</span> <span class="nav-text">501 未实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-错误-502"><span class="nav-number">1.13.</span> <span class="nav-text">HTTP 错误 502</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#502-网关出错"><span class="nav-number">1.13.1.</span> <span class="nav-text">502 网关出错</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zing</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
